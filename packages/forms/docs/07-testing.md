@@ -103,6 +103,23 @@ it('has a title field', function () {
 
 > Note that if you have multiple forms on a Livewire component, you can specify which form you want to check for the existence of the field like `assertFormFieldExists('title', 'createPostForm')`.
 
+### Many fields
+If you are testing for the existence of many fields at once you can use `assertFormFieldsExist()`.
+
+```php
+use function Pest\Livewire\livewire;
+
+it('has a title field', function () {
+    livewire(CreatePost::class)
+        ->assertFormFieldsExist([
+            'fieldA',
+            'fieldB',
+            // ...
+            'fieldZ',
+        ]);
+});
+```
+
 ### Hidden fields
 
 To ensure that a field is visible pass the name to `assertFormFieldIsVisible()`:

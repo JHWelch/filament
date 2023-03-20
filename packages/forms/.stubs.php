@@ -15,6 +15,8 @@ namespace Livewire\Testing {
 
         public function assertFormFieldExists(string $fieldName, string $formName = 'form'): static {}
 
+        public function assertFormFieldsExist(array $fieldNames, string $formName = 'form'): static {}
+
         public function assertFormFieldIsDisabled(string $fieldName, string $formName = 'form'): static {}
 
         public function assertFormFieldIsEnabled(string $fieldName, string $formName = 'form'): static {}

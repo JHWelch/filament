@@ -25,6 +25,18 @@ it('has fields', function () {
         ->assertFormFieldExists('nested.input');
 });
 
+it('has many fields', function () {
+    livewire(TestComponentWithForm::class)
+        ->assertFormFieldsExist([
+            'title',
+            'nested.input',
+            'disabled',
+            'enabled',
+            'hidden',
+            'visible',
+        ]);
+});
+
 it('has fields on multiple forms', function () {
     livewire(TestComponentWithMultipleForms::class)
         ->assertFormFieldExists('title', 'fooForm')

@@ -160,6 +160,33 @@ class TestsForms
         };
     }
 
+    public function assertFormFieldsExist(): Closure
+    {
+        return function (array $fieldNames, string $formName = 'form'): static {
+            /** @phpstan-ignore-next-line  */
+            $this->assertFormExists($formName);
+
+            $livewire = $this->instance();
+            $livewireClass = $livewire::class;
+
+            /** @var ComponentContainer $form */
+            $form = $livewire->{$formName};
+
+            /** @var array<?Field> $fields */
+            $fields = $form->getFlatFields(withHidden: true);
+
+            foreach ($fieldNames as $fieldName) {
+                Assert::assertInstanceOf(
+                    Field::class,
+                    $fields[$fieldName] ?? null,
+                    "Failed asserting that a field with the name [{$fieldName}] exists on the form with the name [{$formName}] on the [{$livewireClass}] component."
+                );
+            }
+
+            return $this;
+        };
+    }
+
     public function assertFormFieldIsDisabled(): Closure
     {
         return function (string $fieldName, string $formName = 'form'): static {
